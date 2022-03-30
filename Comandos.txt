@@ -1,0 +1,116 @@
+> Problema : Maquina virtual que necessita de muitas vlans e pelo GUI do Hyper-V nao estava deixando criar mais de 8 interfaces.
+> Solução : Criar as interfaces pelo powershell,colocar a id da vlan na interface criada,pegar o mac address de todas as interfaces que foram criadas na vm,
+"bater" o macaddress com a interface virtual dentro da VM, colocar IP na interface certa.
+
+##Criar interface de rede virtual chamada Vlan260
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name Vlan260 -DeviceNaming On
+
+##Setar vlan especifica na interface criada
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "Vlan260"-Access -VlanId 260
+
+##Pegar o MacAddress da Vm de dentro do HOST##
+Get-VM -VMName "Coletor Orion-IP_172.29.0.252" | Get-VMNetworkAdapter | ft VMName,MacAddress,Name
+
+##Pegar MacAddress da interface de dentro da VM
+Get-NetAdapter -Name * | select Name,MacAddress
+
+##Renomear interface
+Rename-NetAdapter -Name "Ethernet" -NewName "ManagementAdapter"
+_____________________________________________________________________________________________________________________________
+
+##CRIANDO AS INTERFACES##
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN281 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN287 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN60 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN354 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN370 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN285 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN365 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN267 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN284 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN294 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN300 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN263 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN514 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN399 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN12 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN366 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN308 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN351 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN286 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN30 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN309 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN283 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN306 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN311 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN253 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN2286 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN516 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN364 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN336 -DeviceNaming On
+Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name VLAN282 -DeviceNaming On
+
+##SETANDO A ID DA VLAN NAS INTERFACES CRIADAS##
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN281" -Access -VlanId 281
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN287" -Access -VlanId 287
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN60" -Access -VlanId 60
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN354" -Access -VlanId 354
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN370" -Access -VlanId 370
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN285" -Access -VlanId 285
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN365" -Access -VlanId 365
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN267" -Access -VlanId 267
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN284" -Access -VlanId 284
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN294" -Access -VlanId 294
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN300" -Access -VlanId 300
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN263" -Access -VlanId 263
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN514" -Access -VlanId 514
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN399" -Access -VlanId 399
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN12" -Access -VlanId 12
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN366" -Access -VlanId 366
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN308" -Access -VlanId 308
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN351" -Access -VlanId 351
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN286" -Access -VlanId 286
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN30" -Access -VlanId 30
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN309" -Access -VlanId 309
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN283" -Access -VlanId 283
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN306" -Access -VlanId 306
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN311" -Access -VlanId 311
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN253" -Access -VlanId 253
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN2286" -Access -VlanId 2286
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN516" -Access -VlanId 516
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN364" -Access -VlanId 364
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN336" -Access -VlanId 336
+Set-VMNetworkAdapterVlan -VMName "Coletor Orion-IP_172.29.0.252" -VMNetworkAdapterName "VLAN282" -Access -VlanId 282
+
+##RENOMEANDO INTERFACE##
+
+Rename-NetAdapter  -Name "Ethernet 16" -NewName "VLAN281"
+Rename-NetAdapter  -Name "Ethernet 26" -NewName "VLAN287"
+Rename-NetAdapter  -Name "Ethernet 19" -NewName "VLAN60"
+Rename-NetAdapter  -Name "Ethernet 30" -NewName "VLAN354"
+Rename-NetAdapter  -Name "Ethernet 29" -NewName "VLAN370"
+Rename-NetAdapter  -Name "Ethernet 24" -NewName "VLAN285"
+Rename-NetAdapter  -Name "Ethernet 22" -NewName "VLAN365"
+Rename-NetAdapter  -Name "Ethernet 32" -NewName "VLAN267"
+Rename-NetAdapter  -Name "Ethernet 27" -NewName "VLAN284"
+Rename-NetAdapter  -Name "Ethernet 12" -NewName "VLAN294"
+Rename-NetAdapter  -Name "Ethernet 35" -NewName "VLAN300"
+Rename-NetAdapter  -Name "Ethernet 8" -NewName "VLAN263"
+Rename-NetAdapter  -Name "Ethernet 5" -NewName "VLAN514"
+Rename-NetAdapter  -Name "Ethernet 28" -NewName "VLAN399"
+Rename-NetAdapter  -Name "Ethernet 15" -NewName "VLAN12"
+Rename-NetAdapter  -Name "Ethernet 31" -NewName "VLAN366"
+Rename-NetAdapter  -Name "Ethernet 33" -NewName "VLAN308"
+Rename-NetAdapter  -Name "Ethernet 21" -NewName "VLAN351"
+Rename-NetAdapter  -Name "Ethernet 34" -NewName "VLAN286"
+Rename-NetAdapter  -Name "Ethernet 20" -NewName "VLAN30"
+Rename-NetAdapter  -Name "Ethernet 9" -NewName "VLAN309"
+Rename-NetAdapter  -Name "Ethernet 13" -NewName "VLAN283"
+Rename-NetAdapter  -Name "Ethernet 25" -NewName "VLAN306"
+Rename-NetAdapter  -Name "Ethernet 10" -NewName "VLAN311"
+Rename-NetAdapter  -Name "Ethernet 14" -NewName "VLAN253"
+Rename-NetAdapter  -Name "Ethernet 18" -NewName "VLAN2286"
+Rename-NetAdapter  -Name "Ethernet 17" -NewName "VLAN516"
+Rename-NetAdapter  -Name "Ethernet 11" -NewName "VLAN364"
+Rename-NetAdapter  -Name "Ethernet 7" -NewName "VLAN336"
+Rename-NetAdapter  -Name "Ethernet 23" -NewName "VLAN282"
