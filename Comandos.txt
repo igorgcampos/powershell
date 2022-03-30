@@ -1,7 +1,3 @@
-> Problema : Maquina virtual que necessita de muitas vlans e pelo GUI do Hyper-V nao estava deixando criar mais de 8 interfaces.
-> Solução : Criar as interfaces pelo powershell,colocar a id da vlan na interface criada,pegar o mac address de todas as interfaces que foram criadas na vm,
-"bater" o macaddress com a interface virtual dentro da VM, colocar IP na interface certa.
-
 ##Criar interface de rede virtual chamada Vlan260
 Add-VMNetworkAdapter -VMName "Coletor Orion-IP_172.29.0.252" -SwitchName "Trunk" -Name Vlan260 -DeviceNaming On
 
