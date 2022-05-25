@@ -1,0 +1,9 @@
+#Get-ADUser -Filter * -SearchBase 'OU=Clients-External,OU=TPZ.BR,DC=TELESPAZIO,DC=local' | Select-object DistinguishedName,Name,UserPrincipalName,streetAddress | Out-File -Append C:\Users\igor.admin\Users_postalcode.txt
+#Get-ADUser -Filter * -SearchBase 'OU=Clients-External,OU=TPZ.BR,DC=TELESPAZIO,DC=local' | Select-object
+#Get-ADUser -Filter * -searchbase 'OU=Clients-External,OU=TPZ.BR,DC=TELESPAZIO,DC=local' -SearchScope OneLevel | Format-Table SamAccountName 
+#Get-ADUser -Filter * -searchbase 'OU=Clients-External,OU=TPZ.BR,DC=TELESPAZIO,DC=local' -Properties "streetAddress","l" | Out-File -Append C:\Users\igor.admin\Users_postalcode.txt
+#Get-ADUser -Filter * -SearchBase 'OU=Clients-External,OU=TPZ.BR,DC=TELESPAZIO,DC=local' | Select-object Name,StreetAddress| Out-File -Append C:\Users\igor.admin\User_StreetAddr.txt
+#Get-ADUser -Filter * -searchbase 'OU=Clients-External,OU=TPZ.BR,DC=TELESPAZIO,DC=local' -Properties * | Select DisplayName , Samaccountname , StreetAddress | Export-Csv C:\Users\igor.admin\User_StreetAddrr.txt
+#import-csv "C:\Users\igor.admin\Documents\powershell_create_bulk_users\office_users.csv" | ForEach-Object {Set-ADUser -Identity $_.DisplayName -Office $_.Office}
+Get-ADUser -Filter * -searchbase 'OU=Clients-External,OU=TPZ.BR,DC=TELESPAZIO,DC=local' -Properties * | Select DisplayName , l , StreetAddress >> StreetAddress.txt
+#Get-ADUser -Filter * -searchbase 'OU=TPZ.RJ,OU=TPZ.BR,DC=TELESPAZIO,DC=local' -Properties * | Select DisplayName , Samaccountname , s >> neffter.txt
