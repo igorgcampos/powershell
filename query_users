@@ -7,3 +7,4 @@
 #import-csv "C:\Users\igor.admin\Documents\powershell_create_bulk_users\office_users.csv" | ForEach-Object {Set-ADUser -Identity $_.DisplayName -Office $_.Office}
 Get-ADUser -Filter * -searchbase 'OU=Clients-External,OU=TPZ.BR,DC=TELESPAZIO,DC=local' -Properties * | Select DisplayName , l , StreetAddress >> StreetAddress.txt
 #Get-ADUser -Filter * -searchbase 'OU=TPZ.RJ,OU=TPZ.BR,DC=TELESPAZIO,DC=local' -Properties * | Select DisplayName , Samaccountname , s >> neffter.txt
+#import-csv "C:\Users\igor.admin\Documents\FinUsers.txt" | ForEach-Object {Set-ADUser -Identity $_.DisplayName -City $null -StreetAddress $null} << Preencher os campos com valor NULO
