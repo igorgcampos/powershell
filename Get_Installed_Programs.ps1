@@ -1,13 +1,14 @@
-﻿# Connect to remote computer
-$computer = "rjralves"
-$credential = Get-Credential
-$session = New-PSSession -ComputerName $computer -Credential $credential
+﻿# Insira as credenciais e o nome do computador remoto
+$remoteComputer = "RemoteComputerName"
+$remoteUsername = "domain\username"
+$remotePassword = ConvertTo-SecureString "YourPassword" -AsPlainText -Force
+$credentials = New-Object System.Management.Automation.PSCredential($remoteUsername, $remotePassword)
 
-# Get list of installed programs
-$installedPrograms = Invoke-Command -Session $session -ScriptBlock { Get-WmiObject -Class Win32_Product | Select-Object Name }
+# Execute o psexec e se conecte ao computador remoto para obter a lista de programas instalados
+$scriptBlock = {
+    $installedPrograms = Get-WmiObject -Class Win32_Product | Select-Object -Property Name, Version, Vendor, InstallDate
+    return $installedPrograms
+}
 
-# Display list of installed programs
-$installedPrograms.Name
-
-# Close remote session
-Remove-PSSession $session
+# Chame o Invoke-Command para executar o scriptBlock no computador remoto e exibir a lista na tela
+Invoke-Command -ComputerName $remoteComputer -Credential $credentials -ScriptBlock $scriptBlock | Format-Table -AutoSize

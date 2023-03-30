@@ -8,4 +8,4 @@ if (!(Get-Command choco.exe -errorAction SilentlyContinue)) {
 }
 
 # Instalar o Firefox no computador remoto
-Invoke-Command -ComputerName $RemoteHost -ScriptBlock { choco install windows-admin-center -y }
+Invoke-Command -ComputerName $RemoteHost -ScriptBlock { choco install Opera -y }

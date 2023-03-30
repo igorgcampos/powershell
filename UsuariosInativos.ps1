@@ -1,5 +1,5 @@
-﻿$emailFrom = "TPZ.BR.Engenharia.Sistemas@telespazio.com", "TPZ.BR.TI@telespazio.com"
-$emailTo = "igor.campos@external.telespazio.com"
+﻿$emailFrom = "inativos@telespazio.com.br"
+$emailTo = "TPZ.BR.Engenharia.Sistemas@telespazio.com", "TPZ.BR.TI@telespazio.com"
 $smtpServer = "192.168.100.15"
 $date = Get-Date
 $threshold = $date.AddMonths(-3)
